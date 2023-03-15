@@ -1,45 +1,79 @@
 import {combineReducers, createStore} from 'redux'
 
 type storeType = {
-    id: number,
-    name: string,
+    shopId: number,
+    shopName: string,
+    shopLogin: string,
+    shopPassword: string,
+    categoriesList: categoryType[],
 }
 
-let productionInfo: storeType[] = [
+type categoryType = {
+    categoryId: number,
+    categoryName: string,
+    categoryImage: string,
+    productsList: productType[]
+}
+
+type productType = {
+    productId: number,
+    productName: string,
+    productImage: string,
+}
+
+let shopsInfo: storeType[] = [
     {
-        id: 1,
-        name: 'Category1'
-    },
-    {
-        id: 2,
-        name: 'Category2'
-    },
-    {
-        id: 3,
-        name: 'Category3'
-    },
-    {
-        id: 4,
-        name: 'Category4'
-    },
-    {
-        id: 5,
-        name: 'Category5'
-    },
-    {
-        id: 6,
-        name: 'Category5'
+        shopId: 1,
+        shopName: 'name 1',
+        shopLogin: 'login 1',
+        shopPassword: 'password 1',
+        categoriesList: [
+            {
+                categoryId: 1,
+                categoryName: 'category name 1',
+                categoryImage: 'category image 1',
+                productsList: [
+                    {
+                        productId: 1,
+                        productName: 'product name 1',
+                        productImage: 'product image 1',
+                    },
+                    {
+                        productId: 2,
+                        productName: 'product name 2',
+                        productImage: 'product image 2',
+                    }
+                ]
+            },
+            {
+                categoryId: 2,
+                categoryName: 'category name 2',
+                categoryImage: 'category image 2',
+                productsList: [
+                    {
+                        productId: 1,
+                        productName: 'product name 1',
+                        productImage: 'product image 1',
+                    },
+                    {
+                        productId: 2,
+                        productName: 'product name 2',
+                        productImage: 'product image 2',
+                    }
+                ]
+            },
+        ]
     }
 ]
 
-let productionReducer = (state = productionInfo, action: any) => {
+let shopsReducer = (state = shopsInfo, action: any) => {
     switch (action.type) {
         default: 
             return state
     }
 }
 
-const rootReducer = combineReducers({productionReducer})
+const rootReducer = combineReducers({shopsReducer})
 
 const store = createStore(rootReducer)
 

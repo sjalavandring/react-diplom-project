@@ -2,46 +2,48 @@ import React from 'react';
 import axios from 'axios';
 import './App.scss';
 import Category from './Components/Category/Category';
+import Shop from './Components/Shop/Shop';
+import ShopsList from './Components/ShopsList/ShopsList';
+import {BrowserRouter, Routes, Route} from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux/es/exports';
 import type { storeType } from './store/store';
 
-import iconSearch from '../src/img/iconSearch.png'
-
-type categoriesListType = {
-  productionReducer: storeType[];
+type shopsListType = {
+  shopsReducer: storeType[];
 }
 
 function App() {
-  const categoriesList = useSelector((state: categoriesListType) => state.productionReducer)
-  // console.log(categoriesList)
-
-  axios.get("http://localhost:3001/api/database", {params: {id: 1}})
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    })
+  const shopsList = useSelector((state: shopsListType) => state.shopsReducer)
+  // axios.get("http://localhost:3001/api/database", {params: {id: 1}})
+  //   .then(function (response) {
+  //     console.log(response);
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   })
 
   return (
     <main>
-      <div className='categories-header container'>
-        <div className='categories-change'>
-          <button className="categories-change__change-button authentication-button">Войти</button>
-          {/* <button className="categories-change__change-button action-button">+Еще..</button> */}
-        </div>
-        <div className="categories-search">
-          <img className="categories-search__icon" src={iconSearch} alt="search-icon" />
-          <input className="categories-search__field" type="text" placeholder="Поиск" />
-        </div>
-      </div>
-      <div className='categories-main container'>
-        {
-          categoriesList.map(() => {
-            return <Category/>
-          })
-        }
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<ShopsList/>} /> 
+          {
+            shopsList.map((shopData) => {
+              return (
+                <Route path={`/${shopData.shopName}/*`} element={<Shop/>}> 
+                  {/* {
+                    shopData.categoriesList.map((categoryData) => {
+                      return (
+                        <Route path={`/${categoryData.categoryName}`} element={<Category/>}/>
+                      )
+                    })
+                  } */}
+                </Route>
+              )
+            })
+          }
+        </Routes>
+      </BrowserRouter>
     </main>
   );
 }

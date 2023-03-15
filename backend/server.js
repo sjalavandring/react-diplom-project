@@ -1,3 +1,4 @@
+const mysql = require("mysql2");
 const express = require("express");
 const fs = require("fs");
 const cors = require('cors');
@@ -9,6 +10,35 @@ app.use(cors());
 app.use(express.static(__dirname + "/public"));
 
 const filePath = "database.json";
+
+//Подключение к базе данных MySql
+const connection = mysql.createConnection({
+	host: "localhost",
+	user: "root",
+	database: "diplomDB",
+	password: "root"
+});
+// тестирование подключения
+connection.connect(function(err){
+	if (err) {
+		return console.error("Ошибка: " + err.message);
+	} else {
+		console.log("Подключение к серверу MySQL успешно установлено");
+	}
+});
+connection.execute("SELECT * FROM shops",
+	function(err, results, fields) {
+		console.log(results); // собственно данные
+});
+connection.end();
+// закрытие подключения
+// connection.end(function(err) {
+// 	if (err) {
+// 		return console.log("Ошибка: " + err.message);
+// 	}
+// 	console.log("Подключение закрыто");
+// });
+
 
 
 app.get("/api/database", function(req, res){
