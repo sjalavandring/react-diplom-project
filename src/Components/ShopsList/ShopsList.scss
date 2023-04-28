@@ -1,0 +1,122 @@
+@font-face {
+    font-family: 'TildaSans'; 
+    src: url("../../fonts/TildaSans-Medium.eot") format("eot"); 
+    font-style: normal; 
+    font-weight: normal; 
+    
+    } 
+
+.header {
+    padding: 20px 0 50px;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-logo {
+    width: 70px;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+}
+
+.header-something {
+    width: 70px;
+    height: 70px;
+    border: 1px solid black;
+    margin: 0 20px;
+}
+
+.theme-toggler {
+    display: flex;
+    align-items: center;
+    width: 80px;
+    height: 40px;
+    border: 2px solid #585858;
+    border-radius: 40px;
+    cursor: pointer;
+}
+
+.theme-toggler_theme_light {
+    background-color: #f2f2f2;
+}
+
+.theme-toggler_theme_dark {
+    background-color: #333333;
+}
+
+.theme-toggler__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 70px;
+    height: 30px;
+    margin: 0 auto;
+    color: #fff;
+}
+
+.theme-toggler__switcher {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 30px;
+    width: 30px;
+    border-radius: 40px;
+    background-color: #fff;
+    border: 1px solid #585858 ;
+    user-select: none;
+}
+
+.theme-toggler__switcher_theme_light {
+    margin: 0 auto 0 0;
+    transition: 1s;
+    animation-name: 'toggleLight';
+}
+
+.theme-toggler__switcher_theme_dark {
+    margin: 0 0 0 auto;
+    color: #fff;
+    transition: 1s;
+    animation-name: 'toggledark';
+}
+
+.theme-toggler__image {
+    height: 22px;
+    margin: auto
+}
+
+.shops-about {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 20px;
+}
+
+.shops-about__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.shops-about__image {
+    width: 100%;
+    border: 1px solid #1f1f1f;
+    border-radius: 3px;
+    overflow: hidden;
+    display: block;
+    user-select: none;
+    // max-width: 200px;
+}
+
+.shops-about__description {
+    text-align: left;
+    font-family: 'TildaSans' sans-serif;
+    margin: 5px 0 20px;
+    user-select: none;
+}
+

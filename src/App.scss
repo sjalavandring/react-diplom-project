@@ -1,34 +1,111 @@
 @import "./Components/Category/Category.scss";
-@import "./Components/Shop/Shop.scss";
+@import "./Components/CategoriesList/CategoriesList.scss";
 @import "./Components/ShopsList/ShopsList.scss";
 
-* { 
-    padding: 0px;
-    margin: 0px;
-    border: 0px;
-    box-sizing: border-box;
-  }
+@font-face {
+  font-family: 'TildaSans'; 
+  src: url("../src/fonts/TildaSans-Medium.eot") format("eot"); 
+  font-style: normal; 
+  font-weight: normal; 
 
-  .container {
-    width: 100%;
-    max-width: 1440px;
-    margin: 0 auto;
-  }
-  
-  .shadowBack {
-    position: fixed;
-    z-index: 2;
-    background-color: #000;
-    top: 0px;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    opacity: 0.85;
-    overflow: hidden;
-  }
-  
-  .inactive {
-    display: none;
-    visibility: hidden; 
-  }
+} 
+
+:root[data-theme="light"] {
+  --body-background-color: #ffffff;
+  --html-background-color: #fff;
+  --text-color: #1C1E21;
+}
+
+:root[data-theme="dark"] {
+  --body-background-color: #232324;
+  --html-background-color: #161617;
+  --text-color: #f5f6f7;
+}
+
+*{ 
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+  height: 100vh;
+  // margin-right: calc(-1 * (100vw - 100%));
+  background-color: var(--html-background-color);
+  color: var(--text-color);
+}
+
+body {
+  font-family: 'TildaSans', sans-serif;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  // background-color: #fff;
+  background-color: var(--body-background-color);
+  // color: var(--text-color);
+}
+
+img {
+  display: block;
+}
+
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.shadowBack {
+  position: fixed;
+  z-index: 2;
+  background-color: #000;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  opacity: 0.85;
+  overflow: hidden;
+}
+
+.inactive {
+  display: none;
+  visibility: hidden; 
+}
+
+.main {
+  min-height: calc(100vh - 70px);
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  height: 70px;
+  background-color: #000;
+  color: #fff;
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-contacts {
+  display: flex;
+}
+
+.footer-contacts__item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+.footer-contacts__image {
+  width: 20px;
+  height: 20px;
+  margin: 5px;
+}
 

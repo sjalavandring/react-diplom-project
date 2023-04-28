@@ -26,11 +26,33 @@ connection.connect(function(err){
 		console.log("Подключение к серверу MySQL успешно установлено");
 	}
 });
+
 connection.execute("SELECT * FROM shops",
 	function(err, results, fields) {
-		console.log(results); // собственно данные
+        console.log(results)
+
 });
-connection.end();
+
+
+connection.query("SELECT * FROM shops", function(err, results, fields) {
+    if (err) throw err;
+    let apiData = results;
+    // Запись полученных данных в файл database.json
+    // fs.writeFile('database.json', JSON.stringify(results), function(err) {
+    //   if (err) throw err;
+    //   console.log('Данные успешно записаны в файл database.json');
+    // });
+  
+    apiData.forEach((shopData, shopId) => {
+        connection.query(`SELECT * FROM categories WHERE categories.shop_id = ${shopId}`, function(err, results, fields) {
+            if (err) throw err;
+            results != 0 ? {apiData[shopId + 1].categoriesList.push(results)} : undefined
+        });
+    }, [])
+
+    console.log(apiData)
+  });
+
 // закрытие подключения
 // connection.end(function(err) {
 // 	if (err) {
@@ -38,8 +60,6 @@ connection.end();
 // 	}
 // 	console.log("Подключение закрыто");
 // });
-
-
 
 app.get("/api/database", function(req, res){
     const content = fs.readFileSync(filePath,"utf8");

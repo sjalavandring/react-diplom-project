@@ -1,8 +1,13 @@
 import React from "react";
+import ShopsListCards from "./ShopsListCards";
 
 function ShopsList () {
     return (
-        <div>ShopsList</div>
+        <>
+            <main className="shops">
+                <ShopsListCards/>
+            </main>
+        </>
     )
 }
 
