@@ -12,7 +12,7 @@
 
 :root[data-theme="light"] {
   --body-background-color: #ffffff;
-  --html-background-color: #fff;
+  --html-background-color: #f5f6f7;
   --text-color: #1C1E21;
 }
 
@@ -42,7 +42,7 @@ body {
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
-  // background-color: #fff;
+  // background-color: #ccc;
   background-color: var(--body-background-color);
   // color: var(--text-color);
 }
@@ -50,7 +50,6 @@ body {
 img {
   display: block;
 }
-
 
 .container {
   width: 90%;
@@ -76,6 +75,11 @@ img {
 
 .main {
   min-height: calc(100vh - 70px);
+  // background-color: #f5f6f7;
+}
+
+.authentication-button {
+  cursor: pointer;
 }
 
 .footer {
@@ -108,4 +112,6 @@ img {
   height: 20px;
   margin: 5px;
 }
+
+
 

@@ -1,6 +1,7 @@
 import {combineReducers, createStore} from 'redux'
 
 import themeReducer from './themeReducer'
+import visuallyModeReducer from './visuallyImpairedReducer'
 
 type storeType = {
     shop_id: number,
@@ -28,132 +29,48 @@ type productType = {
 }
 
 let shopsInfo: storeType[] = [
-    // {
-    //     shopId: 1,
-    //     shopName: 'name1',
-    //     shopLogin: 'login1',
-    //     shopPassword: 'password1',
-    //     categoriesList: [
-    //         {
-    //             categoryId: 1,
-    //             categoryName: 'categoryName1',
-    //             categoryImage: 'categoryImage1',
-    //             productsList: [
-    //                 {
-    //                     productId: 1,
-    //                     productName: 'productName1',
-    //                     productImage: 'product image 1',
-    //                 },
-    //                 {
-    //                     productId: 2,
-    //                     productName: 'productName2',
-    //                     productImage: 'productImage2',
-    //                 }
-    //             ]
-    //         },
-    //         {
-    //             categoryId: 2,
-    //             categoryName: 'categoryName2',
-    //             categoryImage: 'categoryImage2',
-    //             productsList: [
-    //                 {
-    //                     productId: 1,
-    //                     productName: 'productName1',
-    //                     productImage: 'productImage1',
-    //                 },
-    //                 {
-    //                     productId: 2,
-    //                     productName: 'productName2',
-    //                     productImage: 'productImage2',
-    //                 }
-    //             ]
-    //         },
-    //     ]
-    // },
-    // {
-    //     shopId: 1,
-    //     shopName: 'name1',
-    //     shopLogin: 'login1',
-    //     shopPassword: 'password1',
-    //     categoriesList: [
-    //         {
-    //             categoryId: 1,
-    //             categoryName: 'categoryName1',
-    //             categoryImage: 'categoryImage1',
-    //             productsList: [
-    //                 {
-    //                     productId: 1,
-    //                     productName: 'productName1',
-    //                     productImage: 'product image 1',
-    //                 },
-    //                 {
-    //                     productId: 2,
-    //                     productName: 'productName2',
-    //                     productImage: 'productImage2',
-    //                 }
-    //             ]
-    //         },
-    //         {
-    //             categoryId: 2,
-    //             categoryName: 'categoryName2',
-    //             categoryImage: 'categoryImage2',
-    //             productsList: [
-    //                 {
-    //                     productId: 1,
-    //                     productName: 'productName1',
-    //                     productImage: 'productImage1',
-    //                 },
-    //                 {
-    //                     productId: 2,
-    //                     productName: 'productName2',
-    //                     productImage: 'productImage2',
-    //                 }
-    //             ]
-    //         },
-    //     ]
-    // },
-    // {
-    //     shopId: 1,
-    //     shopName: 'name1',
-    //     shopLogin: 'login1',
-    //     shopPassword: 'password1',
-    //     categoriesList: [
-    //         {
-    //             categoryId: 1,
-    //             categoryName: 'categoryName1',
-    //             categoryImage: 'categoryImage1',
-    //             productsList: [
-    //                 {
-    //                     productId: 1,
-    //                     productName: 'productName1',
-    //                     productImage: 'product image 1',
-    //                 },
-    //                 {
-    //                     productId: 2,
-    //                     productName: 'productName2',
-    //                     productImage: 'productImage2',
-    //                 }
-    //             ]
-    //         },
-    //         {
-    //             categoryId: 2,
-    //             categoryName: 'categoryName2',
-    //             categoryImage: 'categoryImage2',
-    //             productsList: [
-    //                 {
-    //                     productId: 1,
-    //                     productName: 'productName1',
-    //                     productImage: 'productImage1',
-    //                 },
-    //                 {
-    //                     productId: 2,
-    //                     productName: 'productName2',
-    //                     productImage: 'productImage2',
-    //                 }
-    //             ]
-    //         },
-    //     ]
-    // },
+    {
+        shop_id: 1,
+        shop_name: 'name1',
+        date_of_create: '26.04.2023',
+        date_of_delete: 'null',
+        categoriesList: [
+            {
+                category_id: 1,
+                category_name: 'categoryName1',
+                category_image: 'categoryImage1',
+                productsList: [
+                    {
+                        productId: 1,
+                        productName: 'productName1',
+                        productImage: 'product image 1',
+                    },
+                    {
+                        productId: 2,
+                        productName: 'productName2',
+                        productImage: 'productImage2',
+                    }
+                ]
+            },
+            {
+                category_id: 2,
+                category_name: 'categoryName2',
+                category_image: 'categoryImage1',
+                productsList: [
+                    {
+                        productId: 1,
+                        productName: 'productName1',
+                        productImage: 'product image 1',
+                    },
+                    {
+                        productId: 2,
+                        productName: 'productName2',
+                        productImage: 'productImage2',
+                    }
+                ]
+            },
+        ]
+    },
 ]
 
 let shopsReducer = (state = shopsInfo, action: any,) => {
@@ -166,7 +83,7 @@ let shopsReducer = (state = shopsInfo, action: any,) => {
     }
 }
 
-const rootReducer = combineReducers({shopsReducer, themeReducer})
+const rootReducer = combineReducers({shopsReducer, themeReducer, visuallyModeReducer})
 
 const store = createStore(rootReducer)
 

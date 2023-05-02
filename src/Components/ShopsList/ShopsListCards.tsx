@@ -21,7 +21,7 @@ function ShopsListCards () {
                 {shopsList.map((shopData) => {
                     return (
                         <div className="shops-about__item">
-                            <NavLink to={`/${shopData.shop_name}` }><img className="shops-about__image" src={testImage} alt="shops-about__image" /></NavLink>
+                            <NavLink to={`/${shopData.shop_name}` }><img className="shops-about__image" src={testImage}  alt="shops-about__image" /></NavLink>
                             <div className="shops-about__description">{shopData.shop_name}</div>
                         </div>
                     )

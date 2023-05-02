@@ -9,6 +9,7 @@ type categoriesListType = {
 }
 
 function Shop() {
+    const dispatch = useDispatch()
     const categoriesList = useSelector((state: categoriesListType) => state.shopsReducer)
     console.log(categoriesList)
 
