@@ -49,24 +49,26 @@ function App() {
     console.log(themeStatus)
   }
 
-  // useEffect(() => {
-  //   axios.get("http://localhost:3001/api/database")
-  //   .then(function (response) {
-  //     console.log(response);
-  //     dispatch({type: "setNewState", newShopsList: response.data})
-  //     console.log(response.data)
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error);
-  //   })
-  // }, [])
+  useEffect(() => {
+    axios.get("http://localhost:3001/api/database")
+    .then(function (response) {
+      console.log(response);
+      dispatch({type: "setNewState", newShopsList: response.data})
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+  }, [])
 
   return (
     <>
       <header className="header">
         <div className="header-content container">
           {/* <img className="header-logo" src={logoImg} alt="logo" /> */}
-          <p>Logo</p>
+          <div className="logo">
+            <div className="logo__part1">Online</div>
+            <div className="logo__part2">Catalogs</div>
+          </div>
           <div className="header-actions">
             <div className="visually-impaired-toggler">
               <img className="visually-impaired-toggler__image" src={(themeStatus ? darkVisuallyImpairedImg : lightVisuallyImpairedImg)} alt="Режим для слабовидящих" />
@@ -86,9 +88,9 @@ function App() {
           <Routes>
             <Route path='/' element={<ShopsList/>} /> 
             {
-              shopsList.map((shopData) => {
+              shopsList.map((shopData, shopId) => {
                 return (
-                  <Route path={`/${shopData.shop_name}/*`} element={<CategoriesList/>}> 
+                  <Route path={`/${shopData.shop_name}/*`} element={<CategoriesList shopId={shopId}/>}> 
                     {
                       shopData.categoriesList ? shopData.categoriesList.map((categoryData) => {
                         return (

@@ -2,6 +2,7 @@ const mysql = require("mysql2");
 const express = require("express");
 const fs = require("fs");
 const cors = require('cors');
+const path = require('path')
 
 const app = express();
 const jsonParser = express.json();
@@ -27,31 +28,44 @@ connection.connect(function(err){
 	}
 });
 
-connection.execute("SELECT * FROM shops",
-	function(err, results, fields) {
-        console.log(results)
+let apiData = null;
+let shopCategories = [];
 
-});
-
+// Функция, которая выполняет запросы и возвращает промис
+function queryCategories(shopId) {
+    return new Promise((resolve, reject) => {
+        connection.query(`SELECT * FROM categories WHERE categories.shop_id = ${shopId + 1}`, function(err, results, fields) {
+            if (err) reject(err);
+            resolve(results);
+        });
+    });
+}
 
 connection.query("SELECT * FROM shops", function(err, results, fields) {
     if (err) throw err;
-    let apiData = results;
-    // Запись полученных данных в файл database.json
-    // fs.writeFile('database.json', JSON.stringify(results), function(err) {
-    //   if (err) throw err;
-    //   console.log('Данные успешно записаны в файл database.json');
-    // });
-  
-    apiData.forEach((shopData, shopId) => {
-        connection.query(`SELECT * FROM categories WHERE categories.shop_id = ${shopId}`, function(err, results, fields) {
-            if (err) throw err;
-            results != 0 ? {apiData[shopId + 1].categoriesList.push(results)} : undefined
-        });
-    }, [])
+    apiData = results;
 
-    console.log(apiData)
-  });
+    // Массив промисов, каждый из которых представляет результат выполнения запроса категорий для конкретного магазина
+    let promises = apiData.map((shopData, shopId) => {
+        return queryCategories(shopId);
+    });
+
+    // Дожидаемся выполнения всех запросов и записываем результаты в объекты магазинов
+    Promise.all(promises).then((results) => {
+        console.log(results)
+        results.forEach((categories, index) => {
+            apiData[index].categoriesList = categories;
+        });
+
+        // Записываем данные в файл
+        fs.writeFile('database.json', JSON.stringify(apiData), function(err) {
+            if (err) throw err;
+            console.log('Данные успешно записаны в файл database.json');
+        });
+    }).catch((err) => {
+        console.error(err);
+    });
+});
 
 // закрытие подключения
 // connection.end(function(err) {
@@ -89,6 +103,13 @@ app.get("/api/database/:id", function(req, res){
         res.status(200).send();
     }
 })
+
+app.get('/img/:imageName', (req, res) => {
+    const imageName = req.params.imageName;
+    const imagePath = path.join(__dirname, 'img', imageName);
+
+    res.sendFile(imagePath);
+});
 
 app.get("/api", (req, res) => {
     res.json({

@@ -3,109 +3,10 @@
     src: url("../../fonts/TildaSans-Medium.eot") format("eot"); 
     font-style: normal; 
     font-weight: normal; 
-    
-    } 
+} 
 
-.header {
-    padding: 20px 0 50px;
-}
-
-.header-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.header-logo {
-    width: 70px;
-}
-
-.header-actions {
-    display: flex;
-    align-items: center;
-}
-
-.visually-impaired-toggler {
-    display: flex;
-    align-items: center;
-    background-color: #f2f2f2;
-    border: 1px solid #2D323B;
-    transition: .3s;
-    width: 40px;
-    height: 40px;
-    border-radius: 30px;
-    border: 1px solid #2D323B;
-    margin-right: 60px;
-    cursor: pointer;
-    &:hover {
-        transition: .3s;
-        background-color: #f2f2f2;
-        border: 1px solid #2D323B;
-    }
-}
-
-.visually-impaired-toggler__image{
-    width: 30px;
-    height: 30px;
-    margin: 0 auto;
-}
-
-.theme-toggler {
-    display: flex;
-    align-items: center;
-    width: 80px;
-    height: 40px;
-    border: 2px solid #585858;
-    border-radius: 40px;
-    cursor: pointer;
-}
-
-.theme-toggler_theme_light {
-    background-color: #f2f2f2;
-}
-
-.theme-toggler_theme_dark {
-    background-color: #333333;
-}
-
-.theme-toggler__container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 70px;
-    height: 30px;
-    margin: 0 auto;
-    color: #fff;
-}
-
-.theme-toggler__switcher {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 30px;
-    width: 30px;
-    border-radius: 40px;
-    background-color: #fff;
-    border: 1px solid #585858 ;
-    user-select: none;
-}
-
-.theme-toggler__switcher_theme_light {
-    margin: 0 auto 0 0;
-    transition: 1s;
-    animation-name: 'toggleLight';
-}
-
-.theme-toggler__switcher_theme_dark {
-    margin: 0 0 0 auto;
-    color: #fff;
-    transition: 1s;
-    animation-name: 'toggledark';
-}
-
-.theme-toggler__image {
-    height: 22px;
-    margin: auto
+.shops {
+    padding-top: 40px;
 }
 
 .shops-about {
@@ -123,12 +24,16 @@
 
 .shops-about__image {
     width: 100%;
+    height: 150px;
     border: 1px solid #1f1f1f;
     border-radius: 3px;
     overflow: hidden;
     display: block;
     user-select: none;
     // max-width: 200px;
+    -webkit-box-shadow: -3px 0px 55px 14px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: -3px 0px 55px 14px rgba(34, 60, 80, 0.2);
+    box-shadow: -3px 0px 55px 14px rgba(34, 60, 80, 0.2);
 }
 
 .shops-about__description {
@@ -136,5 +41,23 @@
     font-family: 'TildaSans' sans-serif;
     margin: 5px 0 20px;
     user-select: none;
+}
+
+.not-found {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10vh 0;
+}
+
+.not-found__text {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.not-found__image {
+    width: 60px;
+    margin-left: 20px;
 }
 

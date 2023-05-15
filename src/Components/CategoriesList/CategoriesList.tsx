@@ -8,9 +8,10 @@ type categoriesListType = {
   shopsReducer: storeType[];
 }
 
-function Shop() {
+function Shop(props: any) {
+    let currentShopId = props.shopId
     const dispatch = useDispatch()
-    const categoriesList = useSelector((state: categoriesListType) => state.shopsReducer)
+    const categoriesList = useSelector((state: categoriesListType) => state.shopsReducer[currentShopId].categoriesList)
     console.log(categoriesList)
 
     return (
@@ -27,10 +28,14 @@ function Shop() {
             </div>
             <div className='categories-main container'>
                 {
-                    categoriesList.map(() => {
+                    categoriesList ? categoriesList.map((item) => {
                         // return <Category/>
-                        return <div>Hello</div>
-                    })
+                        return <div>{item.category_name}</div>
+                    }) : 
+                    <div className="not-uploaded">
+                        <p className="not-uploaded__text"></p>
+                        <img src="" alt="not uploaded image" className="not-uploaded__image" />
+                    </div>
                 }
             </div>
         </div>
