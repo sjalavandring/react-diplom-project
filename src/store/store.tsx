@@ -2,6 +2,9 @@ import {combineReducers, createStore} from 'redux'
 
 import themeReducer from './themeReducer'
 import visuallyModeReducer from './visuallyImpairedReducer'
+import modalWindowsReducer from './modalWindowsReducer'
+import shadowBackgroundReducer from './shadowBackgroundReducer'
+
 
 type storeType = {
     shop_id: number,
@@ -27,6 +30,13 @@ type productType = {
     productId: number,
     productName: string,
     productImage: string,
+}
+
+type modalWindowInfoType = {
+    autorisationWindowOpened: boolean,
+    newShopWindowOpened: boolean,
+    newCategoryWindowOpened: boolean,
+    newProductWindowOpened: boolean,
 }
 
 let shopsInfo: storeType[] = [
@@ -84,9 +94,9 @@ let shopsReducer = (state = shopsInfo, action: any,) => {
     }
 }
 
-const rootReducer = combineReducers({shopsReducer, themeReducer, visuallyModeReducer})
+const rootReducer = combineReducers({shopsReducer, themeReducer, visuallyModeReducer, modalWindowsReducer, shadowBackgroundReducer})
 
 const store = createStore(rootReducer)
 
 export {store}
-export type { storeType }
+export type { storeType, modalWindowInfoType }

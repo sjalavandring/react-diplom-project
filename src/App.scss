@@ -1,9 +1,12 @@
 @import "./Components/Category/Category.scss";
 @import "./Components/CategoriesList/CategoriesList.scss";
 @import "./Components/ShopsList/ShopsList.scss";
+@import "./Components/Category/Category.scss";
+@import "./Components/ModalWindows/modalWindows.scss";
 
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Inter:wght@800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Maven+Pro:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
 
 @font-face {
   font-family: 'TildaSans'; 
@@ -60,7 +63,7 @@ img {
 
 .shadowBack {
   position: fixed;
-  z-index: 2;
+  z-index: 1;
   background-color: #000;
   top: 0px;
   bottom: 0px;
@@ -204,6 +207,14 @@ img {
 
 .authentication-button {
   cursor: pointer;
+  display: block;
+  height: 40px;
+  padding: 0 15px;
+  border: 2px solid #339900;
+  border-radius: 4px;
+  background-color: #66FF66;
+  text-align: left;
+  font-size: 16px;
 }
 
 .footer {

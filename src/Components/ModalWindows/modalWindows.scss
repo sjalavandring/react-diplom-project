@@ -1,0 +1,97 @@
+.modal-window {
+    position: fixed;
+	z-index: 2;
+    padding: 0 10px;
+    top: 40%;
+    left: 50%;
+    transform: translate(-40%, -50%);
+	border: 1px solid #000;
+    border-radius: 5px;
+	text-align: center;
+	opacity: 1;
+	background-color: #fff;
+	animation-name: modalWindowInfoMoving;
+	animation-duration: 300ms;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	@keyframes modalWindowInfoMoving {
+		0% {
+			transform: translate(-40%, 0%);
+			opacity: 0.6;
+		}
+		100% {
+			transform: translate(-40%, -50%);
+		}
+	}
+}
+
+.window-closer {
+	position: absolute;
+	top: -14px;
+	right: -14px;
+	display: block;
+	width: 28px;
+	height: 28px;
+	border: 1px solid black;
+	border-radius: 50px;
+	background-color: #fff;
+	cursor: pointer;
+}
+
+.window-closer__inner {
+	position: absolute;
+	top: 12px;
+	left: 7px;
+	transform: translate(-50%, -50%);
+}
+
+.window-closer__inner::before,
+.window-closer__inner::after {
+	content: '';
+	position: absolute;
+	width: 14px;
+	height: 2px;
+	background-color: #000;
+}
+
+.window-closer__inner::before {
+	transform: rotate(45deg);
+}
+
+.window-closer__inner::after {
+	transform: rotate(-45deg);
+}
+
+.autorisation-modal-window {
+	display: flex;
+	flex-direction: column;
+}
+
+.modal-window-input {
+	display: block;
+	width: 350px;
+	height: 35px;
+	border: 1px solid #000;
+	border-radius: 2px;
+	margin: 10px 0;
+	padding: 5px 10px;
+	&:focus {
+		border: 1px solid #000;
+		border-radius: 2px;
+	}
+}
+
+.modal-window-button {
+	width: 150px;
+	height: 40px;
+	margin: 10px auto 15px;
+	border: 2px solid #339900;
+	background-color: #66FF66;
+	border-radius: 5px;
+	font-size: 15px;
+	cursor: pointer;
+	transition: 0.3s;
+	&:hover {
+		transform: scale(1.02)
+	}
+}

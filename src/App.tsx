@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux/es/exports';
+
 import './App.scss';
 import Category from './Components/Category/Category';
 import CategoriesList from './Components/CategoriesList/CategoriesList';
 import ShopsList from './Components/ShopsList/ShopsList';
-import {BrowserRouter, Routes, Route} from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux/es/exports';
+import AutorisationModalWindow from './Components/ModalWindows/AutorisationModalWindow';
 
 import type { storeType } from './store/store';
 import type { themeStateType } from './store/themeReducer';
@@ -21,6 +23,9 @@ import lightVisuallyImpairedImg from './img/visually-impaired-logo-light.png'
 import twitterImg from './img/twitter.png'
 import youtubeImg from './img/youtube.png'
 import telegramImg from './img/telegram.png'
+
+import NewShopModalWindow from './Components/ModalWindows/NewShopModalWindow';
+import ShadowBackground from './Components/ModalWindows/ShadowBackground'
 
 type shopsListType = {
   shopsReducer: storeType[];
@@ -38,6 +43,7 @@ function App() {
   const dispatch = useDispatch()
   const shopsList = useSelector((state: shopsListType) => state.shopsReducer)
   const themeStatus = useSelector((state: themeStatusType) => state.themeReducer.isThemeDark)
+  const shadowBackActive = useSelector((state: any) => state.shadowBackgroundReducer.shadowBackActive)
   const visuallyImpairedStatus = useSelector((state: visuallyImpairedStatusType) => state.visuallyModeReducer.isModeActive)
 
   useEffect(() => {
@@ -46,13 +52,12 @@ function App() {
 
   function changeTheme () {
     dispatch({type: "themeChanger"})
-    console.log(themeStatus)
   }
 
   useEffect(() => {
     axios.get("http://localhost:3001/api/database")
     .then(function (response) {
-      console.log(response);
+      // console.log(response);
       dispatch({type: "setNewState", newShopsList: response.data})
     })
     .catch(function (error) {
@@ -105,29 +110,32 @@ function App() {
             }
           </Routes>
         </BrowserRouter>
-        </main>
-        <footer className='footer'>
-          <div className="footer-content container">
-            <div className="footer-copiright">
-              Trunov Dmitry ©
-            </div>
-            <ul className="footer-contacts">
-              <li className="footer-contacts__item">
-                <img className="footer-contacts__image" src={youtubeImg}  alt="youtube"/>
-                Youtube
-              </li>
-              <li className="footer-contacts__item">
-                <img className="footer-contacts__image" src={telegramImg}  alt="telegram"/>
-                Telegram
-              </li>
-              <li className="footer-contacts__item">
-                <img className="footer-contacts__image" src={twitterImg} alt="twitter" />
-                Twitter
-              </li>
-            </ul>
+        <AutorisationModalWindow/>
+        <NewShopModalWindow/>
+        <ShadowBackground/>
+      </main>
+      <footer className='footer'>
+        <div className="footer-content container">
+          <div className="footer-copiright">
+            Trunov Dmitry ©
           </div>
-        </footer>
-      </>
+          <ul className="footer-contacts">
+            <li className="footer-contacts__item">
+              <img className="footer-contacts__image" src={youtubeImg}  alt="youtube"/>
+              Youtube
+            </li>
+            <li className="footer-contacts__item">
+              <img className="footer-contacts__image" src={telegramImg}  alt="telegram"/>
+              Telegram
+            </li>
+            <li className="footer-contacts__item">
+              <img className="footer-contacts__image" src={twitterImg} alt="twitter" />
+              Twitter
+            </li>
+          </ul>
+        </div>
+      </footer>
+    </>
   );
 }
 
