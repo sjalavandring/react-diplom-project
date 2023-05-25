@@ -1,7 +1,6 @@
-@import "./Components/Category/Category.scss";
 @import "./Components/CategoriesList/CategoriesList.scss";
 @import "./Components/ShopsList/ShopsList.scss";
-@import "./Components/Category/Category.scss";
+@import "./Components/ProductsList/ProductsList.scss";
 @import "./Components/ModalWindows/modalWindows.scss";
 
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Inter:wght@800;900&display=swap');
@@ -28,7 +27,11 @@
   --text-color: #f5f6f7;
 }
 
-// :root[]
+// :root[data-theme="dark"] {
+//   --body-background-color: #232324;
+//   --html-background-color: #161617;
+//   --text-color: #f5f6f7;
+// }
 
 *{ 
   padding: 0px;
@@ -130,7 +133,7 @@ img {
   height: 40px;
   border-radius: 30px;
   border: 1px solid #2D323B;
-  margin-right: 60px;
+  margin:0 60px;
   cursor: pointer;
   &:hover {
       transition: .3s;
@@ -205,7 +208,7 @@ img {
 }
 
 
-.authentication-button {
+.modal-open-button {
   cursor: pointer;
   display: block;
   height: 40px;

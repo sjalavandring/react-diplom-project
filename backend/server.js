@@ -41,30 +41,55 @@ function queryCategories(shopId) {
     });
 }
 
+function queryProducts(categoryId) {
+    return new Promise((resolve, reject) => {
+        connection.query(`SELECT * FROM  products WHERE products.category_id = ${categoryId + 1}`, function(err, results, fields) {
+            if (err) reject(err);
+            console.log(results)
+            resolve(results);
+        });
+    });
+}
+ 
 connection.query("SELECT * FROM shops", function(err, results, fields) {
     if (err) throw err;
     apiData = results;
 
     // Массив промисов, каждый из которых представляет результат выполнения запроса категорий для конкретного магазина
-    let promises = apiData.map((shopData, shopId) => {
+    let categoriesPromises = apiData.map((shopData, shopId) => {
         return queryCategories(shopId);
     });
 
-    // Дожидаемся выполнения всех запросов и записываем результаты в объекты магазинов
-    Promise.all(promises).then((results) => {
-        console.log(results)
-        results.forEach((categories, index) => {
-            apiData[index].categoriesList = categories;
-        });
+    let productsPromises = apiData.categoriesList
 
-        // Записываем данные в файл
-        fs.writeFile('database.json', JSON.stringify(apiData), function(err) {
-            if (err) throw err;
-            console.log('Данные успешно записаны в файл database.json');
+    // Дожидаемся выполнения всех запросов и записываем результаты в объекты магазинов
+    connection.query("SELECT * FROM shops", function(err, results, fields) {
+        if (err) throw err;
+        apiData = results;
+    
+        // Массив промисов, каждый из которых представляет результат выполнения запроса категорий для конкретного магазина
+        let promises = apiData.map((shopData, shopId) => {
+            return queryCategories(shopId);
         });
-    }).catch((err) => {
-        console.error(err);
+    
+        // Дожидаемся выполнения всех запросов и записываем результаты в объекты магазинов
+        Promise.all(promises).then((results) => {
+            console.log(results)
+            results.forEach((categories, index) => {
+                apiData[index].categoriesList = categories;
+            });
+    
+            // Записываем данные в файл
+            fs.writeFile('database.json', JSON.stringify(apiData), function(err) {
+                if (err) throw err;
+                console.log('Данные успешно записаны в файл database.json');
+            });
+        }).catch((err) => {
+            console.error(err);
+        });
     });
+
+    
 });
 
 // закрытие подключения

@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import axios from 'axios';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux/es/exports';
 
 import './App.scss';
-import Category from './Components/Category/Category';
+import Category from './Components/ProductsList/ProductsList';
 import CategoriesList from './Components/CategoriesList/CategoriesList';
 import ShopsList from './Components/ShopsList/ShopsList';
 import AutorisationModalWindow from './Components/ModalWindows/AutorisationModalWindow';
@@ -13,7 +13,6 @@ import type { storeType } from './store/store';
 import type { themeStateType } from './store/themeReducer';
 import { visuallyImpairedType } from './store/visuallyImpairedReducer';
 
-import logoImg from './img/logo.png'
 import darkThemeImg from './img/theme-dark.png'
 import lightThemeImg from './img/theme-light.png'
 
@@ -26,6 +25,10 @@ import telegramImg from './img/telegram.png'
 
 import NewShopModalWindow from './Components/ModalWindows/NewShopModalWindow';
 import ShadowBackground from './Components/ModalWindows/ShadowBackground'
+import AutorisationButton from './Components/Buttons/AutorisationButton';
+import NewShopButton from './Components/Buttons/NewShopButton';
+import NewCategoryButton from './Components/Buttons/NewCategoryButton';
+import NewProductButton from './Components/Buttons/NewProductButton';
 
 type shopsListType = {
   shopsReducer: storeType[];
@@ -40,10 +43,10 @@ type visuallyImpairedStatusType = {
 }
 
 function App() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
   const shopsList = useSelector((state: shopsListType) => state.shopsReducer)
   const themeStatus = useSelector((state: themeStatusType) => state.themeReducer.isThemeDark)
-  const shadowBackActive = useSelector((state: any) => state.shadowBackgroundReducer.shadowBackActive)
   const visuallyImpairedStatus = useSelector((state: visuallyImpairedStatusType) => state.visuallyModeReducer.isModeActive)
 
   useEffect(() => {
@@ -66,15 +69,32 @@ function App() {
   }, [])
 
   return (
-    <>
+    <BrowserRouter>
       <header className="header">
         <div className="header-content container">
-          {/* <img className="header-logo" src={logoImg} alt="logo" /> */}
           <div className="logo">
             <div className="logo__part1">Online</div>
             <div className="logo__part2">Catalogs</div>
           </div>
           <div className="header-actions">
+            <Routes>
+              <Route path='/' element={<NewShopButton/>} /> 
+              {
+                shopsList.map((shopData, shopId) => {
+                  return (
+                    <Route path={`/${shopData.shop_name}/*`} element={<NewCategoryButton/>}> 
+                      {
+                        shopData.categoriesList ? shopData.categoriesList.map((categoryData) => {
+                          return (
+                            <Route path={`${categoryData.category_name}/`} element={<NewProductButton/>}/>
+                          )
+                        }) : null
+                      }
+                    </Route>
+                  )
+                })
+              }
+            </Routes>
             <div className="visually-impaired-toggler">
               <img className="visually-impaired-toggler__image" src={(themeStatus ? darkVisuallyImpairedImg : lightVisuallyImpairedImg)} alt="Режим для слабовидящих" />
             </div>
@@ -89,27 +109,24 @@ function App() {
         </div>
       </header>
       <main className="main">
-        <BrowserRouter>
-          <Routes>
-            <Route path='/' element={<ShopsList/>} /> 
-            {
-              shopsList.map((shopData, shopId) => {
-                return (
-                  <Route path={`/${shopData.shop_name}/*`} element={<CategoriesList shopId={shopId}/>}> 
-                    {
-                      shopData.categoriesList ? shopData.categoriesList.map((categoryData) => {
-                        return (
-                          <Route path={`${categoryData.category_name}/`} element={<Category/>}/>
-                        )
-                      }) : null
-                    }
-                    <Route path='*' element={<div>Hello</div>} />
-                  </Route>
-                )
-              })
-            }
-          </Routes>
-        </BrowserRouter>
+        <Routes>
+          <Route path='/' element={<ShopsList/>} /> 
+          {
+            shopsList.map((shopData, shopId) => {
+              return (
+                <Route path={`/${shopData.shop_name}/*`} element={<CategoriesList shopId={shopId}/>}> 
+                  {
+                    shopData.categoriesList ? shopData.categoriesList.map((categoryData) => {
+                      return (
+                        <Route path={`${categoryData.category_name}/`} element={<Category/>}/>
+                      )
+                    }) : null
+                  }
+                </Route>
+              )
+            })
+          }
+        </Routes>
         <AutorisationModalWindow/>
         <NewShopModalWindow/>
         <ShadowBackground/>
@@ -135,7 +152,7 @@ function App() {
           </ul>
         </div>
       </footer>
-    </>
+    </BrowserRouter>
   );
 }
 

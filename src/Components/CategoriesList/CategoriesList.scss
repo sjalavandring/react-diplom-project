@@ -4,6 +4,11 @@
     padding: 40px 0;
 }
 
+.categories-title {
+    display: flex;
+    align-items: center;
+}
+
 .categories-search {
     display: flex;
     align-items: center;
@@ -29,8 +34,8 @@
 }
 
 .categories-main {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 20px;
+    // display: grid;
+    // grid-template-columns: repeat(4, 1fr);
+    // grid-gap: 20px;
     // grid-template-rows: 1fr;
 }

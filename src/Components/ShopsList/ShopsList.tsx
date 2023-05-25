@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
@@ -16,6 +16,9 @@ type shopsListType = {
 }
 
 function ShopsList () {
+    let location = useLocation()
+    console.log(location.pathname)
+
     let shopsList = useSelector((state: shopsListType) => state.shopsReducer)
     let [imageSrc, setImageSrc] = useState('')
 
@@ -25,7 +28,7 @@ function ShopsList () {
                 {
                     shopsList.length > 0 ? (
                         <>
-                            <h2 className="shops-title">Уже в добавлены в систему</h2>
+                            <h2 className="shops-title">Созданные магазины</h2>
                             <div className="shops-about container">
                                 {shopsList.map((shopData: storeType) => {
                                 return <ShopCard shopData={shopData} />;

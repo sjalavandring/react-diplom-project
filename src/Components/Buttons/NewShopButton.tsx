@@ -1,17 +1,17 @@
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux/es/exports';
 
-function AutorisationButton () {
+function NewShopButton () {
     const dispatch = useDispatch()
 
     function changeAutorisationWindowVisibility () {
         dispatch({type: "changeShodowBackgroundStatus"})
-        dispatch({type: "changeAutorisationWindowStatus"})
+        dispatch({type: "changeNewShopWindowStatus"})
     }
 
     return (
-        <button className="authentication-button" onClick={changeAutorisationWindowVisibility}>Войти</button>
+        <button className="modal-open-button" onClick={changeAutorisationWindowVisibility}>Добавить магазин</button>
     )
 }
 
-export default AutorisationButton 
+export default NewShopButton

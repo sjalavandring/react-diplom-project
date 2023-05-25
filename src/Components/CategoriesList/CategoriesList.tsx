@@ -1,9 +1,12 @@
 import React from 'react'
-import Category from '../Category/Category';
+import { useLocation } from 'react-router-dom'
+import Category from '../ProductsList/ProductsList';
 import iconSearch from '../../img/iconSearch.png'
 import { useSelector, useDispatch } from 'react-redux/es/exports';
 import type { storeType } from '../../store/store';
-import AutorisationButton from './AutorisationButton';
+import AutorisationButton from '../Buttons/AutorisationButton';
+
+import notFoundImg from '../../img/not-found.png'
 
 type categoriesListType = {
   shopsReducer: storeType[];
@@ -15,12 +18,15 @@ function Shop(props: any) {
     const categoriesList = useSelector((state: categoriesListType) => state.shopsReducer[currentShopId].categoriesList)
     console.log(categoriesList)
 
+    let location = useLocation()
+    console.log(location.pathname)
+
     return (
+        categoriesList ? 
         <div className="shop">
             <div className='categories container'>
-                <div className='categories-change'>
-                <AutorisationButton />
-                {/* <button className="categories-change__change-button action-button">+Еще..</button> */}
+                <div className='categories-title'>
+                    <h2 className='categories-title__text'>Доступные категории</h2>
                 </div>
                 <div className="categories-search">
                     <img className="categories-search__icon" src={iconSearch} alt="search-icon" />
@@ -29,16 +35,16 @@ function Shop(props: any) {
             </div>
             <div className='categories-main container'>
                 {
-                    categoriesList ? categoriesList.map((item) => {
+                    categoriesList.map((item) => {
                         // return <Category/>
                         return <div>{item.category_name}</div>
-                    }) : 
-                    <div className="not-uploaded">
-                        <p className="not-uploaded__text"></p>
-                        <img src="" alt="not uploaded image" className="not-uploaded__image" />
-                    </div>
+                    })  
                 }
             </div>
+        </div> :
+        <div className="not-found">
+            <div className="not-found__text">Не удалось загрузить данные. Сервер не отвечает</div>
+            <img className="not-found__image" src={notFoundImg} alt="not-found-image" />
         </div>
     )
 }
