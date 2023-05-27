@@ -34,7 +34,7 @@ let shopCategories = [];
 // Функция, которая выполняет запросы и возвращает промис
 function queryCategories(shopId) {
     return new Promise((resolve, reject) => {
-        connection.query(`SELECT * FROM categories WHERE categories.shop_id = ${shopId + 1}`, function(err, results, fields) {
+        connection.query(`SELECT * FROM categories WHERE categories.shop_id = ${shopId }`, function(err, results, fields) {
             if (err) reject(err);
             resolve(results);
         });
@@ -43,53 +43,56 @@ function queryCategories(shopId) {
 
 function queryProducts(categoryId) {
     return new Promise((resolve, reject) => {
-        connection.query(`SELECT * FROM  products WHERE products.category_id = ${categoryId + 1}`, function(err, results, fields) {
+        connection.query(`SELECT * FROM products WHERE products.category_id = ${categoryId }`, function(err, results, fields) {
             if (err) reject(err);
-            console.log(results)
             resolve(results);
         });
     });
 }
- 
 connection.query("SELECT * FROM shops", function(err, results, fields) {
     if (err) throw err;
-    apiData = results;
+    const apiData = results;
 
     // Массив промисов, каждый из которых представляет результат выполнения запроса категорий для конкретного магазина
-    let categoriesPromises = apiData.map((shopData, shopId) => {
-        return queryCategories(shopId);
+    let categoriesPromises = apiData.map((shopData) => {
+        return queryCategories(shopData.shop_id);
     });
 
-    let productsPromises = apiData.categoriesList
-
-    // Дожидаемся выполнения всех запросов и записываем результаты в объекты магазинов
-    connection.query("SELECT * FROM shops", function(err, results, fields) {
-        if (err) throw err;
-        apiData = results;
-    
-        // Массив промисов, каждый из которых представляет результат выполнения запроса категорий для конкретного магазина
-        let promises = apiData.map((shopData, shopId) => {
-            return queryCategories(shopId);
-        });
-    
-        // Дожидаемся выполнения всех запросов и записываем результаты в объекты магазинов
-        Promise.all(promises).then((results) => {
-            console.log(results)
-            results.forEach((categories, index) => {
-                apiData[index].categoriesList = categories;
+    Promise.all(categoriesPromises)
+        .then((results) => {
+            results.forEach((categories, categoryIndex) => {
+                apiData[categoryIndex].categoriesList = categories;
             });
-    
+
+            let productsPromises = [];
+
+            apiData.forEach((shopData) => {
+                shopData.categoriesList.forEach((categoryData) => {
+                    productsPromises.push(queryProducts(categoryData.category_id));
+                });
+            });
+
+            return Promise.all(productsPromises);
+        })
+        .then((results) => {
+            let productIndex = 0;
+
+            apiData.forEach((shopData) => {
+                shopData.categoriesList.forEach((categoryData) => {
+                    categoryData.products = results[productIndex];
+                    productIndex++;
+                });
+            });
+
             // Записываем данные в файл
             fs.writeFile('database.json', JSON.stringify(apiData), function(err) {
                 if (err) throw err;
                 console.log('Данные успешно записаны в файл database.json');
             });
-        }).catch((err) => {
+        })
+        .catch((err) => {
             console.error(err);
         });
-    });
-
-    
 });
 
 // закрытие подключения
