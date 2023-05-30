@@ -20,7 +20,7 @@ function ShopCard(props: { shopData: storeType }) {
   
     return (
       <div className="shops-about__item">
-        <NavLink to={`/${props.shopData.shop_name}`}>
+        <NavLink to={`/${props.shopData.shop_name}/`}>
           <img className="shops-about__image" src={memoizedImageSrc} loading="lazy" alt="shops-about__image" />
         </NavLink>
         <div className="shops-about__description">{props.shopData.shop_name}</div>

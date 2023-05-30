@@ -19,17 +19,13 @@ type categoryType = {
     category_id: number,
     category_name: string,
     category_image: string,
-    productsList: {
-        productId: number,
-        productName: string,
-        productImage: string,
-    }[] | [],
+    productsList: productType[] | [],
 }
 
 type productType = {
-    productId: number,
-    productName: string,
-    productImage: string,
+    product_id: number,
+    product_name: string,
+    product_image: string,
 }
 
 type modalWindowInfoType = {
@@ -99,4 +95,4 @@ const rootReducer = combineReducers({shopsReducer, themeReducer, visuallyModeRed
 const store = createStore(rootReducer)
 
 export {store}
-export type { storeType, modalWindowInfoType }
+export type { storeType, modalWindowInfoType, categoryType, productType }

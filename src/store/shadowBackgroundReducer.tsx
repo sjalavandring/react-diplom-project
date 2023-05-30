@@ -6,7 +6,7 @@ let shadowBackInfo: {shadowBackActive: boolean}= {
 
 let shadowBackgroundReducer = (state = shadowBackInfo, action: any,) => {
     switch (action.type) {
-        case "changeShodowBackgroundStatus": 
+        case "changeShadowBackgroundStatus": 
             return {...state, shadowBackActive: !state.shadowBackActive} 
         default: 
             return state

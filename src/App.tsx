@@ -4,9 +4,9 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux/es/exports';
 
 import './App.scss';
-import Category from './Components/ProductsList/ProductsList';
 import CategoriesList from './Components/CategoriesList/CategoriesList';
 import ShopsList from './Components/ShopsList/ShopsList';
+import ProductsList from './Components/ProductsList/ProductsList';
 import AutorisationModalWindow from './Components/ModalWindows/AutorisationModalWindow';
 
 import type { storeType } from './store/store';
@@ -22,8 +22,11 @@ import lightVisuallyImpairedImg from './img/visually-impaired-logo-light.png'
 import twitterImg from './img/twitter.png'
 import youtubeImg from './img/youtube.png'
 import telegramImg from './img/telegram.png'
+import notFoundImg from './img/not-found.png'
 
 import NewShopModalWindow from './Components/ModalWindows/NewShopModalWindow';
+import NewCategoryModalWindow from './Components/ModalWindows/NewShopModalWindow';
+import NewProductModalWindow from './Components/ModalWindows/NewShopModalWindow';
 import ShadowBackground from './Components/ModalWindows/ShadowBackground'
 import AutorisationButton from './Components/Buttons/AutorisationButton';
 import NewShopButton from './Components/Buttons/NewShopButton';
@@ -82,15 +85,16 @@ function App() {
               {
                 shopsList.map((shopData, shopId) => {
                   return (
-                    <Route path={`/${shopData.shop_name}/*`} element={<NewCategoryButton/>}> 
-                      {
-                        shopData.categoriesList ? shopData.categoriesList.map((categoryData) => {
-                          return (
-                            <Route path={`${categoryData.category_name}/`} element={<NewProductButton/>}/>
-                          )
-                        }) : null
-                      }
-                    </Route>
+                    <>
+                      <Route path={`/${shopData.shop_name}/`} element={<NewCategoryButton/>}/> 
+                        {
+                          shopData.categoriesList ? shopData.categoriesList.map((categoryData, categoryId) => {
+                            return (
+                              <Route path={`/${shopData.shop_name}/${categoryData.category_name}/*`} element={<NewProductButton/>}/>
+                            )
+                          }) : null
+                        }
+                    </>
                   )
                 })
               }
@@ -110,25 +114,42 @@ function App() {
       </header>
       <main className="main">
         <Routes>
+          <Route path='*' element={                        
+            <div className="not-found">
+                <div className="not-found__text">Не удалось загрузить данные. Сервер не отвечает</div>
+                <img className="not-found__image" src={notFoundImg} alt="not-found-image" />
+            </div>
+          }/>
           <Route path='/' element={<ShopsList/>} /> 
           {
             shopsList.map((shopData, shopId) => {
               return (
-                <Route path={`/${shopData.shop_name}/*`} element={<CategoriesList shopId={shopId}/>}> 
+                <>
+                <Route path={`/${shopData.shop_name}/`} element={<CategoriesList shopId={shopId}/>}/> 
                   {
-                    shopData.categoriesList ? shopData.categoriesList.map((categoryData) => {
+                    shopData.categoriesList ? shopData.categoriesList.map((categoryData, categoryId) => {
                       return (
-                        <Route path={`${categoryData.category_name}/`} element={<Category/>}/>
+                        <Route path={`/${shopData.shop_name}/${categoryData.category_name}/`} element={<ProductsList shopId={shopId} categoryId={categoryId}/>}>
+                          {
+                            categoryData.productsList ? categoryData.productsList.map((productData, productId) => {
+                              return (
+                                <Route path={`/${shopData.shop_name}/${categoryData.category_name}/${productData.product_name}/`} element={<div>1</div>}/>
+                              )
+                            }) : null
+                          }
+                        </Route>
                       )
                     }) : null
                   }
-                </Route>
+                </>
               )
             })
           }
         </Routes>
         <AutorisationModalWindow/>
         <NewShopModalWindow/>
+        <NewCategoryModalWindow/>
+        <NewProductModalWindow/>
         <ShadowBackground/>
       </main>
       <footer className='footer'>

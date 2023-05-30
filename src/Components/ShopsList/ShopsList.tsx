@@ -31,7 +31,7 @@ function ShopsList () {
                             <h2 className="shops-title">Созданные магазины</h2>
                             <div className="shops-about container">
                                 {shopsList.map((shopData: storeType) => {
-                                return <ShopCard shopData={shopData} />;
+                                    return <ShopCard shopData={shopData} />;
                                 })}
                             </div>
                         </>

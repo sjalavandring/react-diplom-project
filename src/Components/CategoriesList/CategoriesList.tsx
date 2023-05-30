@@ -1,12 +1,12 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
-import Category from '../ProductsList/ProductsList';
 import iconSearch from '../../img/iconSearch.png'
 import { useSelector, useDispatch } from 'react-redux/es/exports';
 import type { storeType } from '../../store/store';
-import AutorisationButton from '../Buttons/AutorisationButton';
+// import AutorisationButton from '../Buttons/AutorisationButton';
 
 import notFoundImg from '../../img/not-found.png'
+import CategoryCard from './CategoryCard';
 
 type categoriesListType = {
   shopsReducer: storeType[];
@@ -35,9 +35,8 @@ function Shop(props: any) {
             </div>
             <div className='categories-main container'>
                 {
-                    categoriesList.map((item) => {
-                        // return <Category/>
-                        return <div>{item.category_name}</div>
+                    categoriesList.map((item, index) => {
+                        return <CategoryCard categoryData={categoriesList[index]}/>
                     })  
                 }
             </div>

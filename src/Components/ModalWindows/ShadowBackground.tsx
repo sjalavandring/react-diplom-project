@@ -10,7 +10,7 @@ function ShadowBackground () {
 
     function closeAllModalWindows () {
         dispatch({type: "toggleAllWindowsToInactive"})
-        dispatch({type: "changeShodowBackgroundStatus"})
+        dispatch({type: "changeShadowBackgroundStatus"})
     }
 
     if (!backgroundStatus) return null

@@ -5,7 +5,7 @@ function AutorisationButton () {
     const dispatch = useDispatch()
 
     function changeAutorisationWindowVisibility () {
-        dispatch({type: "changeShodowBackgroundStatus"})
+        dispatch({type: "changeShadowBackgroundStatus"})
         dispatch({type: "changeAutorisationWindowStatus"})
     }
 

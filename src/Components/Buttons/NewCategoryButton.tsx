@@ -4,13 +4,13 @@ import { useSelector, useDispatch } from 'react-redux/es/exports';
 function NewCategoryButton () {
     const dispatch = useDispatch()
 
-    function changeAutorisationWindowVisibility () {
-        dispatch({type: "changeShodowBackgroundStatus"})
-        dispatch({type: "changeNewShopWindowStatus"})
+    function changeNewCategoryWindowVisibility () {
+        dispatch({type: "changeShadowBackgroundStatus"})
+        dispatch({type: "changeNewCategoryWindowStatus"})
     }
 
     return (
-        <button className="modal-open-button" onClick={changeAutorisationWindowVisibility}>Добавить категорию</button>
+        <button className="modal-open-button" onClick={changeNewCategoryWindowVisibility}>Добавить категорию</button>
     )
 }
 

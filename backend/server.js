@@ -79,7 +79,7 @@ connection.query("SELECT * FROM shops", function(err, results, fields) {
 
             apiData.forEach((shopData) => {
                 shopData.categoriesList.forEach((categoryData) => {
-                    categoryData.products = results[productIndex];
+                    categoryData.productsList = results[productIndex];
                     productIndex++;
                 });
             });
@@ -108,7 +108,6 @@ app.get("/api/database", function(req, res){
     const database = JSON.parse(content);
     console.log(database)
     res.send(database);
-    // return res.status(200).res.json({message: database})
 });
 
 app.get("/api/database/:id", function(req, res){

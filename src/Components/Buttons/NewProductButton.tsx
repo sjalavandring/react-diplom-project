@@ -4,13 +4,13 @@ import { useSelector, useDispatch } from 'react-redux/es/exports';
 function NewProductButton () {
     const dispatch = useDispatch()
 
-    function changeAutorisationWindowVisibility () {
-        dispatch({type: "changeShodowBackgroundStatus"})
+    function changeNewProductWindowVisibility () {
+        dispatch({type: "changeShadowBackgroundStatus"})
         dispatch({type: "changeNewProductWindowStatus"})
     }
 
     return (
-        <button className="modal-open-button" onClick={changeAutorisationWindowVisibility}>Добавить категорию</button>
+        <button className="modal-open-button" onClick={changeNewProductWindowVisibility}>Добавить товар</button>
     )
 }
 

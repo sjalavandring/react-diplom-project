@@ -7,7 +7,7 @@ function AutorisationModalWindow () {
 
     function closeAllModalWindows () {
         dispatch({type: "changeAutorisationWindowStatus"})
-        dispatch({type: "changeShodowBackgroundStatus"})
+        dispatch({type: "changeShadowBackgroundStatus"})
     }
 
     return (
