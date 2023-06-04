@@ -25,8 +25,8 @@ import telegramImg from './img/telegram.png'
 import notFoundImg from './img/not-found.png'
 
 import NewShopModalWindow from './Components/ModalWindows/NewShopModalWindow';
-import NewCategoryModalWindow from './Components/ModalWindows/NewShopModalWindow';
-import NewProductModalWindow from './Components/ModalWindows/NewShopModalWindow';
+import NewCategoryModalWindow from './Components/ModalWindows/NewCategoryModalWindow';
+import NewProductModalWindow from './Components/ModalWindows/NewProductModalWindow';
 import ShadowBackground from './Components/ModalWindows/ShadowBackground'
 import AutorisationButton from './Components/Buttons/AutorisationButton';
 import NewShopButton from './Components/Buttons/NewShopButton';
@@ -114,7 +114,7 @@ function App() {
       </header>
       <main className="main">
         <Routes>
-          <Route path='*' element={                        
+          <Route path='*' element={
             <div className="not-found">
                 <div className="not-found__text">Не удалось загрузить данные. Сервер не отвечает</div>
                 <img className="not-found__image" src={notFoundImg} alt="not-found-image" />
@@ -129,15 +129,7 @@ function App() {
                   {
                     shopData.categoriesList ? shopData.categoriesList.map((categoryData, categoryId) => {
                       return (
-                        <Route path={`/${shopData.shop_name}/${categoryData.category_name}/`} element={<ProductsList shopId={shopId} categoryId={categoryId}/>}>
-                          {
-                            categoryData.productsList ? categoryData.productsList.map((productData, productId) => {
-                              return (
-                                <Route path={`/${shopData.shop_name}/${categoryData.category_name}/${productData.product_name}/`} element={<div>1</div>}/>
-                              )
-                            }) : null
-                          }
-                        </Route>
+                        <Route path={`/${shopData.shop_name}/${categoryData.category_name}/`} element={<ProductsList shopId={shopId} categoryId={categoryId}/>}/>
                       )
                     }) : null
                   }
@@ -146,7 +138,7 @@ function App() {
             })
           }
         </Routes>
-        <AutorisationModalWindow/>
+        {/* <AutorisationModalWindow/> */}
         <NewShopModalWindow/>
         <NewCategoryModalWindow/>
         <NewProductModalWindow/>

@@ -26,6 +26,10 @@ type productType = {
     product_id: number,
     product_name: string,
     product_image: string,
+    product_description: string,
+    date_of_create: string,
+    date_of_delete: string,
+    key_words: string,
 }
 
 type modalWindowInfoType = {
@@ -33,6 +37,7 @@ type modalWindowInfoType = {
     newShopWindowOpened: boolean,
     newCategoryWindowOpened: boolean,
     newProductWindowOpened: boolean,
+    productWindowOpened: boolean,
 }
 
 let shopsInfo: storeType[] = [
@@ -83,7 +88,6 @@ let shopsInfo: storeType[] = [
 let shopsReducer = (state = shopsInfo, action: any,) => {
     switch (action.type) {
         case "setNewState": 
-            console.log(action.newShopsList)
             return action.newShopsList
         default: 
             return state

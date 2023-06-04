@@ -4,9 +4,17 @@ import axios from 'axios';
 import { NavLink } from "react-router-dom";
 import { productType } from "../../store/store";
 import defaultImage from '../../img/shop-logo.png'
+import ProductModalWindow from "../ModalWindows/ProductModalWindow";
+import { useSelector, useDispatch } from 'react-redux/es/exports';
 
 function ProductCard (props: {productData: productType}) {
     const [imageSrc, setImageSrc] = useState<string>(defaultImage);
+    const dispatch = useDispatch()
+
+    function changeProductWindowVisibility () {
+        dispatch({type: "changeShadowBackgroundStatus"})
+        dispatch({type: "changeProductWindowStatus"})
+    }
   
     useEffect(() => {
       axios
@@ -21,10 +29,9 @@ function ProductCard (props: {productData: productType}) {
 
     return (
         <div className="product-about__item">
-            <NavLink to={`${props.productData.product_name}/`}>
-                <img className="product-about__image" src={memoizedImageSrc} loading="lazy" alt="shops-about__image" />
-            </NavLink>
+            <img className="product-about__image" src={memoizedImageSrc} onClick={changeProductWindowVisibility} loading="lazy" alt="shops-about__image" />
             <div className="product-about__description">{props.productData.product_name}</div>
+            <ProductModalWindow productInfo={props.productData} imageSrc={imageSrc}/>
         </div>
     )
 }

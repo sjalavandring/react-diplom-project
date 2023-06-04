@@ -5,6 +5,7 @@ let modalWindowInfo: modalWindowInfoType = {
     newCategoryWindowOpened: false,
     newShopWindowOpened: false,
     newProductWindowOpened: false,
+    productWindowOpened: false,
 }
 
 let modalWindowsReducer = (state = modalWindowInfo, action: any,) => {
@@ -17,6 +18,9 @@ let modalWindowsReducer = (state = modalWindowInfo, action: any,) => {
             return {...state, newCategoryWindowOpened: !state.newCategoryWindowOpened}
         case "changeNewProductWindowStatus":
             return {...state, newProductWindowOpened: !state.newProductWindowOpened}
+        case "changeProductWindowStatus":
+            console.log(state.productWindowOpened)
+            return {...state, productWindowOpened: !state.productWindowOpened}
         case "toggleAllWindowsToInactive":
             let newModalWindowInfo: any = {}
             for (let windowStatus in state) {

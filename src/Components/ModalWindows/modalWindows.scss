@@ -9,6 +9,7 @@
     border-radius: 5px;
 	text-align: center;
 	opacity: 1;
+	color: #000;
 	background-color: #fff;
 	animation-name: modalWindowInfoMoving;
 	animation-duration: 300ms;
@@ -67,6 +68,28 @@
 	flex-direction: column;
 }
 
+.modal-window-wrapper-preview {
+	border: 1px solid #000;
+	margin-top: 20px;
+}
+
+.modal-window-preview-image {
+	height: 150px;
+	max-width: 244px;
+	margin: 30px 0 10px;
+	background-color: #f5f6f7;
+    overflow: hidden;
+    display: block;
+    user-select: none;
+    -webkit-box-shadow: -3px 0px 55px 14px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: -3px 0px 55px 14px rgba(34, 60, 80, 0.2);
+    box-shadow: -3px 0px 55px 14px rgba(34, 60, 80, 0.2);
+}
+
+.modal-window-preview-button {
+	margin: 10px auto;
+}
+
 .modal-window-input {
 	display: block;
 	width: 350px;
@@ -94,4 +117,14 @@
 	&:hover {
 		transform: scale(1.02)
 	}
+}
+
+.product-about__item_modal {
+	transform: scale(0.6);
+}
+
+.product-about__image {
+	margin: 0 auto 20px;
+    height: 180px;
+    border-radius: 3px;
 }

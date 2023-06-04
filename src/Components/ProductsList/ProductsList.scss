@@ -17,19 +17,12 @@
     padding-top: 20px;
     border: 1px solid black;
     border-radius: 5px;
-    // background-color: #f5f6f7;
     overflow: hidden;
     display: block;
     -webkit-box-shadow: -3px 0px 35px 4px rgba(34, 60, 80, 0.2);
     -moz-box-shadow: -3px 0px 55px 14px rgba(34, 60, 80, 0.2);
     box-shadow: -3px 0px 55px 14px rgba(34, 60, 80, 0.2);
     cursor: pointer;
-}
-
-.product-about__image {
-    margin: 0 auto 20px;
-    height: 180px;
-    border-radius: 3px;
 }
 
 .product-about__description {

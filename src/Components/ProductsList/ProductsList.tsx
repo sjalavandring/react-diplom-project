@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux/es/exports';
 import { storeType } from '../../store/store';
 import iconSearch from '../../img/iconSearch.png'
@@ -11,7 +11,10 @@ type shopsListType = {
 function ProductsList(props: {shopId: number, categoryId: number}) {
     const dispatch = useDispatch();
     const productsList = useSelector((state: shopsListType) => state.shopsReducer[props.shopId].categoriesList[props.categoryId].productsList)
-    console.log(productsList)
+
+    // useEffect(() => {
+    //     dispatch({type: "changeShadowBackgroundStatus"})
+    // }, [])
 
     return (
         productsList ? 

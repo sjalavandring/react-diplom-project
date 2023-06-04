@@ -19,11 +19,11 @@ function CategoryCard (props: {categoryData: categoryType}) {
     const memoizedImageSrc = useMemo(() => imageSrc, [imageSrc]);
 
     return (
-        <div className="shops-about__item">
+        <div className="category-about__item">
             <NavLink to={`${props.categoryData.category_name}/`}>
-                <img className="shops-about__image" src={imageSrc} loading="lazy" alt="shops-about__image" />
+                <img className="category-about__image" src={imageSrc} loading="lazy" alt="shops-about__image" />
             </NavLink>
-            <div className="shops-about__description">{props.categoryData.category_name}</div>
+            <div className="category-about__description">{props.categoryData.category_name}</div>
         </div>
     )
 }

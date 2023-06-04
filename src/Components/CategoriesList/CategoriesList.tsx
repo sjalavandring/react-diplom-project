@@ -18,9 +18,6 @@ function Shop(props: any) {
     const categoriesList = useSelector((state: categoriesListType) => state.shopsReducer[currentShopId].categoriesList)
     console.log(categoriesList)
 
-    let location = useLocation()
-    console.log(location.pathname)
-
     return (
         categoriesList ? 
         <div className="shop">
