@@ -8,6 +8,7 @@ import ProductCard from './ProductCard';
 type shopsListType = {
     shopsReducer: storeType[];
 }
+
 function ProductsList(props: {shopId: number, categoryId: number}) {
     const dispatch = useDispatch();
     const productsList = useSelector((state: shopsListType) => state.shopsReducer[props.shopId].categoriesList[props.categoryId].productsList)

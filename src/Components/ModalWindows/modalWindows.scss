@@ -104,6 +104,16 @@
 	}
 }
 
+.modal-window-checkbox {
+	display: flex;
+	align-items: center;
+}
+
+.modal-window-checkbox__field {
+	display: block;
+	margin-right: 10px;
+}
+
 .modal-window-button {
 	width: 150px;
 	height: 40px;
@@ -119,6 +129,12 @@
 	}
 }
 
+.new-account-button {
+	font-size: 15px;
+	color:#0645AD;
+	cursor: pointer;
+}
+
 .product-about__item_modal {
 	transform: scale(0.6);
 }
@@ -127,4 +143,9 @@
 	margin: 0 auto 20px;
     height: 180px;
     border-radius: 3px;
+}
+
+.product-modal-window {
+	display: flex;
+	align-items: center;
 }

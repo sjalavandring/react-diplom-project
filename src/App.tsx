@@ -9,7 +9,7 @@ import ShopsList from './Components/ShopsList/ShopsList';
 import ProductsList from './Components/ProductsList/ProductsList';
 import AutorisationModalWindow from './Components/ModalWindows/AutorisationModalWindow';
 
-import type { storeType } from './store/store';
+import type { authenticationType, storeType } from './store/store';
 import type { themeStateType } from './store/themeReducer';
 import { visuallyImpairedType } from './store/visuallyImpairedReducer';
 
@@ -32,6 +32,8 @@ import AutorisationButton from './Components/Buttons/AutorisationButton';
 import NewShopButton from './Components/Buttons/NewShopButton';
 import NewCategoryButton from './Components/Buttons/NewCategoryButton';
 import NewProductButton from './Components/Buttons/NewProductButton';
+import AddNewUserButton from "./Components/Buttons/AddNewUserButton"
+import NewUserModalWindow from './Components/ModalWindows/NewUserModalWindow';
 
 type shopsListType = {
   shopsReducer: storeType[];
@@ -51,6 +53,7 @@ function App() {
   const shopsList = useSelector((state: shopsListType) => state.shopsReducer)
   const themeStatus = useSelector((state: themeStatusType) => state.themeReducer.isThemeDark)
   const visuallyImpairedStatus = useSelector((state: visuallyImpairedStatusType) => state.visuallyModeReducer.isModeActive)
+  const autorisationInfo = useSelector((state: {authenticationReducer: authenticationType}) => state.authenticationReducer)
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", themeStatus ? 'dark' : 'light')
@@ -81,12 +84,17 @@ function App() {
           </div>
           <div className="header-actions">
             <Routes>
-              <Route path='/' element={<NewShopButton/>} /> 
+              <Route path='/' element={
+                <>
+                  {autorisationInfo.isAuthorized ? <NewShopButton/> : <AutorisationButton/>}
+                  {autorisationInfo.isAdmin ? <AddNewUserButton/> : null}
+                </>
+              }/> 
               {
                 shopsList.map((shopData, shopId) => {
                   return (
                     <>
-                      <Route path={`/${shopData.shop_name}/`} element={<NewCategoryButton/>}/> 
+                      <Route path={`/${shopData.shop_name}/`} element={autorisationInfo.isAuthorized ? <NewCategoryButton/> : null}/> 
                         {
                           shopData.categoriesList ? shopData.categoriesList.map((categoryData, categoryId) => {
                             return (
@@ -138,7 +146,8 @@ function App() {
             })
           }
         </Routes>
-        {/* <AutorisationModalWindow/> */}
+        <AutorisationModalWindow/>
+        <NewUserModalWindow/>
         <NewShopModalWindow/>
         <NewCategoryModalWindow/>
         <NewProductModalWindow/>

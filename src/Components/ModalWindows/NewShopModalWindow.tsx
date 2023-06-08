@@ -11,7 +11,7 @@ const NewShopModalWindow = () => {
     const shopModalWindowStatus = useSelector((state: any) => state.modalWindowsReducer.newShopWindowOpened);
     
     function closeAllModalWindows () {
-        dispatch({type: "changeNewCategoryWindowStatus"})
+        dispatch({type: "changeNewShopWindowStatus"})
         dispatch({type: "changeShadowBackgroundStatus"})
     }
 

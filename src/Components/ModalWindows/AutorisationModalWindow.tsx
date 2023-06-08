@@ -17,6 +17,7 @@ function AutorisationModalWindow () {
             </span>
             <input type="text" className="modal-window-input" placeholder="Логин"/>
             <input type="password" className="modal-window-input" placeholder="Пароль"/>
+            <a className="new-account-button">Нет аккаунта? Создать</a>
             <button className="modal-window-button" onClick={closeAllModalWindows}>Отправить</button>
         </div>
     )

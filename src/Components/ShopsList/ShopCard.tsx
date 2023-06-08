@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { storeType } from "../../store/store";
 import axios from "axios";
 import defaultImage from '../../img/shop-logo.png'
+import editImage from '../../img/edit-image.png'
 
 function ShopCard(props: { shopData: storeType }) {
     const [imageSrc, setImageSrc] = useState<string>(defaultImage);
@@ -24,6 +25,9 @@ function ShopCard(props: { shopData: storeType }) {
           <img className="shops-about__image" src={memoizedImageSrc} loading="lazy" alt="shops-about__image" />
         </NavLink>
         <div className="shops-about__description">{props.shopData.shop_name}</div>
+        <div className="card-editor">
+          <img className="card-editor__image" src={editImage} alt="editImage" />
+        </div>
       </div>
     );
   }

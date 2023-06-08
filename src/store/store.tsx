@@ -4,6 +4,7 @@ import themeReducer from './themeReducer'
 import visuallyModeReducer from './visuallyImpairedReducer'
 import modalWindowsReducer from './modalWindowsReducer'
 import shadowBackgroundReducer from './shadowBackgroundReducer'
+import authenticationReducer from './authenticationReducer'
 
 
 type storeType = {
@@ -34,56 +35,19 @@ type productType = {
 
 type modalWindowInfoType = {
     autorisationWindowOpened: boolean,
+    newUserWindowOpened: boolean,
     newShopWindowOpened: boolean,
     newCategoryWindowOpened: boolean,
     newProductWindowOpened: boolean,
     productWindowOpened: boolean,
 }
 
-let shopsInfo: storeType[] = [
-    // {
-    //     shop_id: 1,
-    //     shop_name: 'name1',
-    //     date_of_create: '26.04.2023',
-    //     date_of_delete: 'null',
-    //     categoriesList: [
-    //         {
-    //             category_id: 1,
-    //             category_name: 'categoryName1',
-    //             category_image: 'categoryImage1',
-    //             productsList: [
-    //                 {
-    //                     productId: 1,
-    //                     productName: 'productName1',
-    //                     productImage: 'product image 1',
-    //                 },
-    //                 {
-    //                     productId: 2,
-    //                     productName: 'productName2',
-    //                     productImage: 'productImage2',
-    //                 }
-    //             ]
-    //         },
-    //         {
-    //             category_id: 2,
-    //             category_name: 'categoryName2',
-    //             category_image: 'categoryImage1',
-    //             productsList: [
-    //                 {
-    //                     productId: 1,
-    //                     productName: 'productName1',
-    //                     productImage: 'product image 1',
-    //                 },
-    //                 {
-    //                     productId: 2,
-    //                     productName: 'productName2',
-    //                     productImage: 'productImage2',
-    //                 }
-    //             ]
-    //         },
-    //     ]
-    // },
-]
+type authenticationType = {
+    isAuthorized: boolean;
+    isAdmin: boolean;
+}
+
+let shopsInfo: storeType[] = []
 
 let shopsReducer = (state = shopsInfo, action: any,) => {
     switch (action.type) {
@@ -94,9 +58,9 @@ let shopsReducer = (state = shopsInfo, action: any,) => {
     }
 }
 
-const rootReducer = combineReducers({shopsReducer, themeReducer, visuallyModeReducer, modalWindowsReducer, shadowBackgroundReducer})
+const rootReducer = combineReducers({shopsReducer, themeReducer, visuallyModeReducer, modalWindowsReducer, shadowBackgroundReducer, authenticationReducer})
 
 const store = createStore(rootReducer)
 
 export {store}
-export type { storeType, modalWindowInfoType, categoryType, productType }
+export type { storeType, modalWindowInfoType, categoryType, productType, authenticationType }
